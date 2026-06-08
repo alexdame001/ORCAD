@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORCAD Integrated Limited | Pure Product, Healthy Living</title>
+    <style>
+        /* --- ORCAD CORPORATE DESIGN TOKENS --- */
+        :root {
+            --orcad-green: #14532d;       /* Deep Forest Green */
+            --orcad-green-hover: #166534; /* Slightly lighter green for focus states */
+            --orcad-orange: #f59e0b;      /* Vibrant Marigold Orange */
+            --orcad-orange-hover: #fbbf24;/* Warm gold hover accent */
+            --text-dark: #1e293b;         /* Crisp slate grey for readable typography */
+            --bg-light: #f8fafc;          /* Off-white canvas background */
+            --border-muted: #e2e8f0;      /* Subtle grid borders */
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- STICKY NAVIGATION HEADER --- */
+        header {
+            background-color: var(--orcad-green);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            color: var(--white);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--orcad-orange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active-link {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid var(--orcad-orange);
+        }
+
+        /* --- SINGLE PAGE ROUTER CONTROLS --- */
+        .page-view {
+            display: none;
+            animation: fadeInView 0.4s ease-in-out forwards;
+            min-height: 80vh;
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        @keyframes fadeInView {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BRAND HERO SHOWCASES --- */
+        .home-hero {
+            background: linear-gradient(rgba(20, 83, 45, 0.65), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .home-hero h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+        .home-hero p { font-size: 1.3rem; max-width: 800px; margin-bottom: 30px; color: #f1f5f9; }
+        
+        .internal-hero {
+            background: linear-gradient(rgba(20, 83, 45, 0.9), rgba(20, 83, 45, 0.75)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 4px solid var(--orcad-orange);
+        }
+        .internal-hero h2 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 8px; }
+        .internal-hero p { color: #cbd5e1; font-size: 1rem; }
+
+        /* --- BUTTONS SYSTEM --- */
+        .cta-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            padding: 12px 26px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+        .btn-orange { background-color: var(--orcad-orange); color: var(--white); }
+        .btn-orange:hover { background-color: var(--orcad-orange-hover); transform: translateY(-2px); }
+        .btn-green { background-color: var(--orcad-green); color: var(--white); }
+        .btn-green:hover { background-color: var(--orcad-green-hover); transform: translateY(-2px); }
+        .btn-outline { background-color: transparent; color: var(--white); border: 2px solid var(--white); }
+        .btn-outline:hover { background-color: var(--white); color: var(--orcad-green); }
+
+        /* --- RESPONSIVE GRIDS & CARDS --- */
+        section { padding: 60px 6%; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2rem; color: var(--orcad-green); margin-bottom: 10px; text-transform: uppercase; font-weight: 800; }
+        .section-subtitle { text-align: center; color: #64748b; max-width: 750px; margin: 0 auto 45px; font-size: 1rem; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+
+        .orcad-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-muted);
+            border-radius: 6px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            transition: transform var(--transition), box-shadow var(--transition);
+            border-top: 3px solid var(--orcad-green);
+        }
+        .orcad-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.05); }
+        .orcad-card h3 { color: var(--orcad-green); margin-bottom: 12px; font-size: 1.25rem; }
+        
+        .badge {
+            background-color: rgba(245, 158, 11, 0.12);
+            color: #b45309;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .media-box {
+            background: #f1f5f9;
+            height: 180px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* --- INTERACTIVE SEGMENT TABS --- */
+        .tab-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 35px; flex-wrap: wrap; }
+        .tab-trigger {
+            padding: 10px 22px;
+            background: var(--white);
+            border: 1px solid var(--border-muted);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .tab-trigger.tab-active, .tab-trigger:hover {
+            background-color: var(--orcad-green);
+            color: var(--white);
+            border-color: var(--orcad-green);
+        }
+        .tab-pane { display: none; }
+        .tab-pane.pane-active { display: block; }
+
+        /* --- SYSTEMS INTAKE FORMS --- */
+        .form-holder { background: var(--white); padding: 40px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border-top: 4px solid var(--orcad-orange); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; color: #475569; }
+        .field-control { width: 100%; padding: 11px; border: 1px solid var(--border-muted); border-radius: 4px; font-size: 0.9rem; background-color: #f8fafc; }
+        .field-control:focus { outline: none; border-color: var(--orcad-green); background-color: var(--white); }
+
+        /* --- MASTER FOOTER SYSTEM --- */
+        footer { background-color: #0f172a; color: #94a3b8; padding: 60px 4% 20px; font-size: 0.85rem; border-top: 5px solid var(--orcad-orange); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto 40px; }
+        .footer-col h4 { color: var(--white); font-size: 1rem; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-col p { margin-bottom: 10px; line-height: 1.6; }
+        .footer-col a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 8px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--orcad-orange); }
+        .footer-base { border-top: 1px solid #1e293b; padding-top: 20px; text-align: center; }
+        
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .home-hero h2 { font-size: 2.2rem; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo"><h1>ORCAD<span>INTEGRATED</span></h1></div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link active-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#services" class="nav-link">Segments</a></li>
+                    <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#why-choose-us" class="nav-link">Why Orcad</a></li>
+                    <li><a href="#partnerships" class="nav-link">Partner With Us</a></li>
+                    <li><a href="#portfolio" class="nav-link">Operations</a></li>
+                    <li><a href="#strategy" class="nav-link">Growth</a></li>
+                    <li><a href="#careers" class="nav-link">Careers</a></li>
+                    <li><a href="#insights" class="nav-link">News</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="home-view" class="page-view active-view">
+        <div class="home-hero">
+            <h2>Pure Product, Healthy Living</h2>
+            <p>Integrated Agribusiness & Agro-Processing Powerhouse operating a vertically integrated Feed-to-Fork model.</p>
+            <div class="cta-group">
+                <a href="#partnerships" class="btn btn-orange">Partner With Us</a>
+                <a href="#products" class="btn btn-outline">Explore Our Products</a>
+                <a href="#rfp" class="btn btn-green" style="background-color: var(--white); color: var(--orcad-green);">Request a Quote</a>
+            </div>
+        </div>
+        
+        <section>
+            <h2 class="section-title">Who We Are</h2>
+            <p class="section-subtitle">ORCAD Integrated Ltd is a fast-growing Nigerian agribusiness company positioned to become a fully integrated food production and agro-processing powerhouse.</p>
+            <div class="grid-3">
+                <div class="orcad-card">
+                    <h3>Integrated Ecosystem</h3>
+                    <p>Our operational framework bridges raw crop components directly with consumer arrays under total vertical authority from feed production to distribution.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Strategic Locations</h3>
+                    <p>Headquartered and operating processing matrices inside Okaka Village along the Ibadan Saki Road corridor.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Sustainable Core</h3>
+                    <p>From organic agricultural cycles to biosecurity shields, we build food systems designed for broad regional resilience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--white);">
+            <h2 class="section-title">Customer Testimonials</h2>
+            <p class="section-subtitle">Read feedback collected from our active wholesale distributors and institutional clients.</p>
+            <div class="grid-3">
+                <div class="orcad-card" style="background: var(--bg-light); border-top-color: var(--orcad-orange);">
+                    <p><em>"ORCAD's frozen whole birds arrive consistently packed at accurate temperatures, matching our corporate quality specs month over month."</em></p>
+                    <h5 style="margin-top:15px; color: var(--orcad-green); font-weight:700;">- Procurement Manager, Regional Hotel Network</h5>
+                </div>
+                <div class="orcad-card" style="background: var(--bg-light); border-top-color: var(--orcad-orange);">
+                    <p><em>"The protein performance conversion ratio within their customized poultry feed helped reduce our operational cycle overheads substantially."</em></p>
+                    <h5 style="margin-top:15px; color: var(--orcad-green); font-weight:700;">- Commercial Outgrower Coordinator</h5>
+                </div>
+                <div class="orcad-card" style="background: var(--bg-light); border-top-color: var(--orcad-orange);">
+                    <p><em>"Pure Grade-A Red Palm Oil shipments arrive double-filtered with ideal clarity. An exceptional commercial partner."</em></p>
+                    <h5 style="margin-top:15px; color: var(--orcad-green); font-weight:700;">- Bulk Commodities Distributor</h5>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="about-view" class="page-view">
+        <div class="internal-hero">
+            <h2>About Our Enterprise</h2>
+            <p>Driven by strict quality control across every layer of agriculture.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+                <div class="orcad-card">
+                    <span class="badge">Vision</span>
+                    <p>To become Nigeria’s most trusted integrated agro-industrial brand, delivering affordable, high-quality, and sustainable food products across Africa.</p>
+                </div>
+                <div class="orcad-card">
+                    <span class="badge">Mission Pillars</span>
+                    <ul style="padding-left:15px; font-size:0.9rem;">
+                        <li>Ensure absolute regional food security</li>
+                        <li>Cultivate sustainable rural employment</li>
+                        <li>Maximize shared shareholder value</li>
+                        <li>Deliver affordable premium products</li>
+                    </ul>
+                </div>
+                <div class="orcad-card">
+                    <span class="badge">Core Values</span>
+                    <p>Integrity, Operational Excellence, Innovation, Sustainability, Community Impact, and Customer First approach.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section style="background: var(--white);" id="leadership-team">
+            <h2 class="section-title">Leadership Team</h2>
+            <p class="section-subtitle">The management steering ORCAD's downstream processing structures.</p>
+            <div style="max-width:350px; margin:0 auto;">
+                <div class="orcad-card" style="text-align: center;">
+                    <div class="media-box" style="border-radius:50%; width:150px; height:150px; margin:0 auto 20px;">IMAGE PLACEHOLDER</div>
+                    <h4>CADET P. ROBERT</h4>
+                    <p style="color: var(--orcad-orange); font-weight: 700; font-size: 0.85rem; text-transform:uppercase;">Chief Executive Officer</p>
+                    <p style="font-size:0.85rem; margin-top:10px; color:#475569;">Directing institutional strategy, downstream processing scaling, and commercial partnerships across Africa.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="services-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Our Business Segments</h2>
+            <p>Four interconnected matrices executing our vertically integrated operational model.</p>
+        </div>
+        <section>
+            <div class="tab-bar">
+                <button class="tab-trigger tab-active" onclick="switchSegment(event, 'seg-crop')">Crop Production</button>
+                <button class="tab-trigger" onclick="switchSegment(event, 'seg-poultry')">Poultry Division</button>
+                <button class="tab-trigger" onclick="switchSegment(event, 'seg-livestock')">Livestock Division</button>
+                <button class="tab-trigger" onclick="switchSegment(event, 'seg-processing')">Agro-Processing</button>
+            </div>
+
+            <div id="seg-crop" class="tab-pane pane-active orcad-card">
+                <h3>Commercial Crop Production</h3>
+                <p style="margin-bottom:15px;">Utilizing local soils to supply critical baseline raw components for our milling and extraction facilities.</p>
+                <div class="grid-3" style="gap:15px;">
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Maize Cultivation</strong>
+                        <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Broad acreage production focused on high starch metrics for internal feed formulation lines.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Soybean Farming</strong>
+                        <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Securing vital high-protein vegetable components assigned for livestock nutrition mash processing.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Palm Plantation</strong>
+                        <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Sustained planting footprints serving raw fresh fruit bunches to downstream filtration systems.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Pepper Farming</strong>
+                        <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Commercial cultivation of high-yield pepper varieties for domestic commodity supply hubs.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Vegetable Farming</strong>
+                        <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Controlled open-field cultivation of essential vegetables supporting market dietary needs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seg-poultry" class="tab-pane orcad-card">
+                <h3>Biosecure Poultry Arrays</h3>
+                <p style="margin-bottom:15px;">High-yield sanitary poultry holdings managed under automated environmental metrics.</p>
+                <div class="grid-4" style="gap:15px;">
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Live Broilers</strong>
+                        <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Healthy commercial birds raised under strict veterinary protocols.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Frozen Chicken</strong>
+                        <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Hygienically processed and blast-frozen premium whole birds and cuts.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Day-Old Chicks</strong>
+                        <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Resilient parent stock lines configured for distribution to outgrower channels.</p>
+                    </div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;">
+                        <strong>Poultry Feed</strong>
+                        <p style="font-size:0.8rem; color:#475569; margin-top:5px;">High-efficiency, custom-formulated animal nutrition arrays.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seg-livestock" class="tab-pane orcad-card">
+                <h3>Advanced Livestock Breeding</h3>
+                <p style="margin-bottom:15px;">Breeding resilient genetic varieties monitored by onsite tracking loops.</p>
+                <div class="grid-4" style="gap:15px;">
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Goats</strong><p style="font-size:0.8rem; color:#475569; margin-top:5px;">High meat yield varieties configured for commercial output markets.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Sheep</strong><p style="font-size:0.8rem; color:#475569; margin-top:5px;">Resilient local ruminant stock parameters.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Pigs</strong><p style="font-size:0.8rem; color:#475569; margin-top:5px;">Controlled, high-sanitation piggery arrays.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Cattle</strong><p style="font-size:0.8rem; color:#475569; margin-top:5px;">Commercial beef supply chains for institutional contracts.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px; grid-column: span 2;"><strong>Apiary Operations</strong><p style="font-size:0.8rem; color:#475569; margin-top:5px;">Modern structured honey production and bee colony handling for agro-processing.</p></div>
+                </div>
+            </div>
+
+            <div id="seg-processing" class="tab-pane orcad-card">
+                <h3>Industrial Agro-Processing</h3>
+                <p style="margin-bottom:15px;">Adding value to raw assets to deliver commercial market alternatives.</p>
+                <div class="grid-3" style="gap:15px;">
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Palm Oil Production</strong><p style="font-size:0.85rem; color:#475569; margin-top:5px;">Double-filtered culinary grade red oil processing.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Palm Kernel Oil (PKO)</strong><p style="font-size:0.85rem; color:#475569; margin-top:5px;">Industrial extraction supplying consumer manufacturing segments.</p></div>
+                    <div style="background:#f8fafc; padding:15px; border-radius:4px;"><strong>Feed Mill Plant</strong><p style="font-size:0.85rem; color:#475569; margin-top:5px;">Centralized custom blending facility for performance feeds.</p></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="products-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Featured Products Catalog</h2>
+            <p>Premium outputs available for commercial allocation and wholesale contract supply.</p>
+        </div>
+        <section>
+            <div class="grid-4">
+                <div class="orcad-card" style="padding:20px;">
+                    <div class="media-box">PRODUCT IMAGE</div>
+                    <span class="badge">Nutrition</span>
+                    <h4>Poultry Feed</h4>
+                    <p style="font-size:0.8rem; margin:8px 0; color:#475569;">High-conversion performance feeds for broilers and layers.</p>
+                    <p style="font-weight:700; font-size:0.85rem; margin-bottom:12px;">Packaging: 25kg / 50kg Bags</p>
+                    <a href="#rfp" class="btn btn-orange" style="display:block; text-align:center; padding:8px; font-size:0.75rem;">Request Quote</a>
+                </div>
+                <div class="orcad-card" style="padding:20px;">
+                    <div class="media-box">PRODUCT IMAGE</div>
+                    <span class="badge">Protein</span>
+                    <h4>Frozen Chicken</h4>
+                    <p style="font-size:0.8rem; margin:8px 0; color:#475569;">Blast-frozen whole birds and selective cleanroom cuts.</p>
+                    <p style="font-weight:700; font-size:0.85rem; margin-bottom:12px;">Packaging: Standard Wholesale Cartons</p>
+                    <a href="#rfp" class="btn btn-orange" style="display:block; text-align:center; padding:8px; font-size:0.75rem;">Request Quote</a>
+                </div>
+                <div class="orcad-card" style="padding:20px;">
+                    <div class="media-box">PRODUCT IMAGE</div>
+                    <span class="badge">Extraction</span>
+                    <h4>Palm Oil</h4>
+                    <p style="font-size:0.8rem; margin:8px 0; color:#475569;">Low acidity, double-filtered edible culinary red oil.</p>
+                    <p style="font-weight:700; font-size:0.85rem; margin-bottom:12px;">Packaging: 25L Jerricans / Industrial Bulk</p>
+                    <a href="#rfp" class="btn btn-orange" style="display:block; text-align:center; padding:8px; font-size:0.75rem;">Request Quote</a>
+                </div>
+                <div class="orcad-card" style="padding:20px;">
+                    <div class="media-box">PRODUCT IMAGE</div>
+                    <span class="badge">Livestock</span>
+                    <h4>Live Broilers</h4>
+                    <p style="font-size:0.8rem; margin:8px 0; color:#475569;">Healthy, vet-checked commercial birds at optimal market weight.</p>
+                    <p style="font-weight:700; font-size:0.85rem; margin-bottom:12px;">Packaging: Batch Crates</p>
+                    <a href="#rfp" class="btn btn-orange" style="display:block; text-align:center; padding:8px; font-size:0.75rem;">Request Quote</a>
+                </div>
+            </div>
+        </section>
+        
+        <section style="background:var(--white);" id="industries-served">
+            <h2 class="section-title">Industries Served</h2>
+            <p class="section-subtitle">Delivering bulk volumes to multiple specialized market setups.</p>
+            <div class="grid-4">
+                <div style="text-align:center; padding:15px;">
+                    <div style="color:var(--orcad-orange); font-size:2rem; margin-bottom:10px;">🏨</div>
+                    <h4>Hotels & Hospitality</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Calibrated daily kitchens supply contracts.</p>
+                </div>
+                <div style="text-align:center; padding:15px;">
+                    <div style="color:var(--orcad-orange); font-size:2rem; margin-bottom:10px;">🏬</div>
+                    <h4>Wholesalers</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Commodity volume frameworks for open markets.</p>
+                </div>
+                <div style="text-align:center; padding:15px;">
+                    <div style="color:var(--orcad-orange); font-size:2rem; margin-bottom:10px;">🏛️</div>
+                    <h4>Institutional Supply</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Regular supply pipelines for schools, NGOs, and agencies.</p>
+                </div>
+                <div style="text-align:center; padding:15px;">
+                    <div style="color:var(--orcad-orange); font-size:2rem; margin-bottom:10px;">🌍</div>
+                    <h4>Export Markets</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Regulatory-compliant shipping for sub-regional trade.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="why-choose-us-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Why Choose ORCAD</h2>
+            <p>Strategic advantages anchoring our agro-industrial market model.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+                <div class="orcad-card">
+                    <h3>Vertical Integration</h3>
+                    <p>Complete Feed-to-Fork value chain authority protects production uniformity from raw input stages up to retail packaging.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Cost Leadership</h3>
+                    <p>Internal feed mill production buffers our operations against global crop market spikes, yielding a 15-25% margin cushion.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Multiple Revenue Streams</h3>
+                    <p>Our diversified product ecosystem across crops, poultry, honey extraction, and livestock mitigates sector risks.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Strong Leadership</h3>
+                    <p>Guided by seasoned executive corporate governance and technical agribusiness professionals.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Technology Driven</h3>
+                    <p>Deploying modern biosecurity setups, processing equipment, and field monitoring to sustain yields.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Market Focus</h3>
+                    <p>Engineered to dynamically satisfy expanding domestic demand while unlocking export pipelines.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="partnerships-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Partner With ORCAD</h2>
+            <p>Sustainable agricultural systems expand via corporate alliance modules.</p>
+        </div>
+        <section class="grid-2">
+            <div>
+                <h3 style="color:var(--orcad-green); margin-bottom:15px;">Partnership Opportunities</h3>
+                <p style="margin-bottom:20px;">We collaborate with diverse strategic bodies to foster market expansion and regional food security loops.</p>
+                
+                <ul style="list-style:none;">
+                    <li style="margin-bottom:12px;"><strong>Investment Opportunities:</strong> Open to institutional capital seeking optimized agribusiness exposure.</li>
+                    <li style="margin-bottom:12px;"><strong>Contract Farming Program:</strong> Integrating verified outgrowers via structured input supply schemas.</li>
+                    <li style="margin-bottom:12px;"><strong>Product Distribution Franchise:</strong> Expand your trade portfolio as an authenticated regional distributor.</li>
+                    <li style="margin-bottom:12px;"><strong>Development & NGO Partners:</strong> Joint community empowerment setups, solar scaling, and youth jobs creation.</li>
+                </ul>
+            </div>
+            
+            <div class="form-holder">
+                <h3 style="margin-bottom:15px; text-align:center; color:var(--orcad-green);">Partnership Form</h3>
+                <form onsubmit="alert('Prototype Capture: Connect this form layout to a Laravel controller endpoint to process database intakes.'); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="field-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" class="field-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Partnership Interest Focus</label>
+                        <select class="field-control">
+                            <option>Product Distribution Franchise</option>
+                            <option>Institutional Supply Contract</option>
+                            <option>Contract Farming Program</option>
+                            <option>Investment Opportunities</option>
+                            <option>Development/NGO Collaboration</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="field-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="field-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Message Proposal</label>
+                        <textarea class="field-control" rows="3" placeholder="Describe your collaboration requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-green" style="width:100%;">Submit Proposal</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="portfolio-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Operations & Active Assets</h2>
+            <p>A look at our active infrastructure footprint across Oyo State.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+                <div class="orcad-card">
+                    <div class="media-box">ASSET PHOTO / VIDEO</div>
+                    <h4>Poultry Facilities</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Biosecure holding layers and broiler units operating out of our specialized regional farming complex.</p>
+                </div>
+                <div class="orcad-card">
+                    <div class="media-box">ASSET PHOTO / VIDEO</div>
+                    <h4>Feed Mill Plant</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Centralized mechanical nutrition processing site handling grading, mixing, and packaging.</p>
+                </div>
+                <div class="orcad-card">
+                    <div class="media-box">ASSET PHOTO / VIDEO</div>
+                    <h4>Palm Oil Mill Processing</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Equipped extraction facilities processing raw harvested bunches into culinary red oil.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="strategy-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Investors & Growth Roadmap</h2>
+            <p>Tracking milestones from baseline foundation up to West African expansion.</p>
+        </div>
+        <section style="max-width:850px;">
+            <div style="position:relative; padding-left:30px; border-left:3px solid var(--orcad-orange);">
+                <div style="margin-bottom:30px;">
+                    <span class="badge" style="background:var(--orcad-green); color:white;">Current Phase</span>
+                    <h4 style="color:var(--orcad-green);">Operational Foundation</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Managing 10,000 broilers per cycle, localized feed mill facilities, and entry-level palm oil extractions along the Ibadan Saki Road pipeline.</p>
+                </div>
+                <div style="margin-bottom:30px;">
+                    <span class="badge" style="background:#cbd5e1; color:#475569;">Phase 2</span>
+                    <h4>Scale Expansion Matrix</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Scaling poultry runs to 30,000 birds per cycle, broadening arable crop acreage, and launching our branded retail frozen chicken lines.</p>
+                </div>
+                <div>
+                    <span class="badge" style="background:#cbd5e1; color:#475569;">Phase 3</span>
+                    <h4>Regional Export Scaling</h4>
+                    <p style="font-size:0.9rem; color:#475569;">Acquiring regional export certifications, introducing multi-state facility arrays, and securing retail supermarket space across West Africa.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section style="background:var(--white);" id="sustainability">
+            <h2 class="section-title">Risk Management & Sustainability</h2>
+            <p class="section-subtitle">Mitigating challenges via sustainable infrastructure execution.</p>
+            <div class="grid-4">
+                <div class="orcad-card" style="background:var(--bg-light); padding:20px;">
+                    <h5>Food Security</h5>
+                    <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Cultivating predictable local supply lines to buffer food availability.</p>
+                </div>
+                <div class="orcad-card" style="background:var(--bg-light); padding:20px;">
+                    <h5>Strict Biosecurity</h5>
+                    <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Enforcing isolation parameters to prevent disease risk.</p>
+                </div>
+                <div class="orcad-card" style="background:var(--bg-light); padding:20px;">
+                    <h5>Solar Energy Plans</h5>
+                    <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Investing in off-grid solar fields to buffer national power instability.</p>
+                </div>
+                <div class="orcad-card" style="background:var(--bg-light); padding:20px;">
+                    <h5>Local Employment</h5>
+                    <p style="font-size:0.8rem; color:#475569; margin-top:5px;">Mobilizing rural labor networks to foster community growth.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="careers-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Careers Portal</h2>
+            <p>Join an active team executing modern agro-industrial development models.</p>
+        </div>
+        <section class="grid-2">
+            <div>
+                <h3 style="color:var(--orcad-green); margin-bottom:15px;">Current Open Positions</h3>
+                <div style="background:var(--white); padding:15px; border-radius:4px; margin-bottom:12px; border-left:4px solid var(--orcad-green);">
+                    <strong>Oil Production Supervisor</strong>
+                    <p style="font-size:0.8rem; color:#64748b;">Location: Okaka Village Facility | Full-Time</p>
+                </div>
+                <div style="background:var(--white); padding:15px; border-radius:4px; margin-bottom:12px; border-left:4px solid var(--orcad-green);">
+                    <strong>Farm Manager (Poultry/Livestock)</strong>
+                    <p style="font-size:0.8rem; color:#64748b;">Location: Okaka Village Site | Full-Time</p>
+                </div>
+                <div style="background:var(--white); padding:15px; border-radius:4px; margin-bottom:12px; border-left:4px solid var(--orcad-green);">
+                    <strong>Feed Mill Operator</strong>
+                    <p style="font-size:0.8rem; color:#64748b;">Location: Okaka Village Plant | Operations</p>
+                </div>
+            </div>
+            
+            <div class="form-holder">
+                <h3 style="margin-bottom:10px; text-align:center; color:var(--orcad-green);">Apply Portal</h3>
+                <p style="font-size:0.8rem; color:#64748b; text-align:center; margin-bottom:20px;">This file input will route securely using Laravel's <code>Storage</code> handling method post-deployment.</p>
+                <form onsubmit="alert('Prototype Mode: File upload parsing will configure via multi-part requests directly to your backend.'); return false;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="field-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" class="field-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Designation</label>
+                        <select class="field-control">
+                            <option>Oil Production Supervisor</option>
+                            <option>Farm Manager</option>
+                            <option>Feed Mill Operator</option>
+                            <option>Sales Representative</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Attach CV Document (PDF / DOCX)</label>
+                        <input type="file" class="field-control" required style="background:none; border:none; padding:0;">
+                    </div>
+                    <button type="submit" class="btn btn-green" style="width:100%;">Transmit Application</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="insights-view" class="page-view">
+        <div class="internal-hero">
+            <h2>News & Insights Corporate Blog</h2>
+            <p>Tracking our regular farm activities, launches, and corporate updates.</p>
+        </div>
+        <section>
+            <div class="grid-3">
+                <div class="orcad-card">
+                    <span class="badge">Developments</span>
+                    <h4>Feed Formula Update Completed</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Optimizing internal broiler weights three days ahead of regular timeline metrics using customized crop feed arrays.</p>
+                </div>
+                <div class="orcad-card">
+                    <span class="badge">Corporate Scaling</span>
+                    <h4>Solar Panel Asset Allocations</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Phase 1 clean solar investment installations mapping launched to completely secure milling grids from regional outages.</p>
+                </div>
+                <div class="orcad-card">
+                    <span class="badge">CSR Operations</span>
+                    <h4>Okaka Village Smallholders Alliance</h4>
+                    <p style="font-size:0.85rem; color:#475569; margin-top:5px;">Deploying training workshops and outgrower chick packages to boost local economic safety values across the agricultural corridor.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Contact Our Offices</h2>
+            <p>Get in touch with our operations center directly via standard pipelines.</p>
+        </div>
+        <section>
+            <div class="grid-3" style="text-align:center; margin-bottom:40px; justify-content: center;">
+                <div class="orcad-card" style="grid-column: span 1.5;">
+                    <h4>Corporate Locations</h4>
+                    <p style="font-size:0.95rem; font-weight:700; color:var(--orcad-green); margin-top:10px;">Head Office & Farm Complex:</p>
+                    <p style="font-size:0.9rem; color:#475569; margin-top:5px;">Ibadan Okaka Village along Ibadan Saki Road, Oyo State, Nigeria</p>
+                </div>
+                <div class="orcad-card" style="grid-column: span 1.5;">
+                    <h4>Direct Contact Lines</h4>
+                    <p style="font-size:0.9rem; color:#475569; margin-top:15px;"><strong>Phone:</strong> 07035373107</p>
+                    <p style="font-size:0.9rem; color:#475569;"><strong>Email:</strong> prcadet@orcadintegratedlimited.com</p>
+                </div>
+            </div>
+            
+            <div style="background:var(--white); padding:40px; border-radius:6px; box-shadow:0 4px 6px rgba(0,0,0,0.01); text-align:center; border: 1px solid var(--border-muted);">
+                <h4>Geographic Map Navigation Matrix</h4>
+                <p style="color:#64748b; font-size:0.85rem; margin:10px 0;">[Interactive Google Maps Integration Module - Okaka Village Along Ibadan Saki Road Coordinates Zone]</p>
+                <a href="https://wa.me/2347035373107" target="_blank" class="whatsapp-btn">Open WhatsApp Chat Desk</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="rfp-view" class="page-view">
+        <div class="internal-hero">
+            <h2>Request For Proposal (RFP)</h2>
+            <p>Submit bulk quantitative procurement metrics directly to our supply handlers.</p>
+        </div>
+        <section style="max-width:800px;">
+            <div class="form-holder">
+                <h3 style="text-align:center; margin-bottom:10px; color:var(--orcad-green);">Enterprise Quote Form</h3>
+                <p style="text-align:center; font-size:0.85rem; color:#64748b; margin-bottom:25px;">For volume distributions, corporate culinary hotel supply lines, or institutional accounts.</p>
+                <form onsubmit="alert('Prototype Caught: This setup will fire dynamic automated mail notifications or database lines when your Laravel controllers go active.'); return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Organization / Entity Title</label>
+                            <input type="text" class="field-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Delivery Region</label>
+                            <input type="text" class="field-control" required placeholder="e.g. Ibadan, Saki, Lagos, Export">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Product Spectrum</label>
+                        <select class="field-control">
+                            <option>Premium Poultry Feed (Wholesale Tonnage)</option>
+                            <option>Frozen Chicken Wholesale Cartons</option>
+                            <option>Day-Old Chicks outgrower packages</option>
+                            <option>Industrial Grade Palm Kernel Oil (PKO)</option>
+                            <option>Bulk Farm Produce Supply (Pepper/Vegetables)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Volume Specifications & Contract Frequency</label>
+                        <textarea class="field-control" rows="3" placeholder="State quantities required and logistics intervals..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Authorized Phone Line</label>
+                            <input type="tel" class="field-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Professional Email Address</label>
+                            <input type="email" class="field-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-green" style="width:100%; padding:14px; font-size:0.9rem;">Transmit Formal RFP Document</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>ORCAD Integrated Limited</h4>
+                <p>Pure Product, Healthy Living. An integrated agribusiness and agro-processing powerhouse driving local African abundance models.</p>
+                <p><strong>RC-9312228</strong></p>
+            </div>
+            <div class="footer-col">
+                <h4>Core Matrices</h4>
+                <a href="#home">Home System</a>
+                <a href="#services">Business Segments</a>
+                <a href="#partnerships">Partnership Portals</a>
+                <a href="#rfp">Request For Proposal</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operations Center</h4>
+                <p><strong>Head Office & Farm:</strong> Ibadan Okaka Village along Ibadan Saki road, Oyo State, Nigeria.</p>
+            </div>
+        </div>
+        <div class="footer-base">
+            <p>&copy; 2026 ORCAD Integrated Limited. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const links = document.querySelectorAll('.nav-link, .btn');
+        const viewPanes = document.querySelectorAll('.page-view');
+
+        function processApplicationRoute() {
+            let activeHash = window.location.hash || '#home';
+            if(activeHash === '') activeHash = '#home';
+
+            // 1. Deactivate older views
+            viewPanes.forEach(pane => pane.classList.remove('active-view'));
+
+            // 2. Clear navbar highlighting indicators
+            document.querySelectorAll('.nav-link').forEach(node => node.classList.remove('active-link'));
+
+            // 3. Mount targeted destination
+            const targetId = activeHash.replace('#', '') + '-view';
+            const destinationPane = document.getElementById(targetId);
+            
+            if(destinationPane) {
+                destinationPane.classList.add('active-view');
+            } else {
+                document.getElementById('home-view').classList.add('active-view');
+            }
+
+            // 4. Update corresponding navbar highlighting indicators
+            document.querySelectorAll('.nav-link').forEach(node => {
+                if(node.getAttribute('href') === activeHash) {
+                    node.classList.add('active-link');
+                }
+            });
+
+            // Keep screen baseline anchored smoothly post navigation switch
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('hashchange', processApplicationRoute);
+        window.addEventListener('load', processApplicationRoute);
+
+        // INNER SEGMENT SWITCHER LOGIC
+        function switchSegment(evt, targetPaneId) {
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('pane-active'));
+            document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('tab-active'));
+            
+            document.getElementById(targetPaneId).classList.add('pane-active');
+            evt.currentTarget.classList.add('tab-active');
+        }
+    </script>
+</body>
+</html>
