@@ -9,6 +9,7 @@
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.ico" />
     <title>ORCAD Integrated Limited | Pure Product, Healthy Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- ORCAD CORPORATE DESIGN TOKENS --- */
         :root {
@@ -27,7 +28,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
@@ -276,6 +277,19 @@
         .btn:focus { outline: 3px solid rgba(21,128,61,0.15); outline-offset: 3px; }
         .hero-animate { opacity: 0; transform: translateY(6px); transition: opacity 520ms ease, transform 520ms ease; }
         .hero-animate.is-visible { opacity: 1; transform: translateY(0); }
+        @keyframes floatY {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        .leaf { transform-origin: 12px 12px; animation: floatY 6s ease-in-out infinite; }
+        .leaf.leaf-2 { animation-delay: 1.2s; }
+        .leaf.leaf-3 { animation-delay: 2.4s; }
+
+        /* CTA ripple effect */
+        .btn { position: relative; overflow: hidden; }
+        .ripple { position: absolute; border-radius: 50%; transform: scale(0); background: rgba(255,255,255,0.35); pointer-events: none; }
+        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -311,11 +325,23 @@
             <h2>Pure Product, Healthy Living</h2>
             <div style="display:flex; gap:14px; align-items:center; margin-bottom:12px;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <svg class="hero-animate" width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                        <circle cx="12" cy="12" r="11" fill="#f59e0b" opacity="0.08"/>
-                        <path d="M6 13c1-3 5-6 9-6" stroke="#14532d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 7c1 1 2 1 3 2 1 1 2 3 1 5" stroke="#14532d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 12c-2 2-4 3-6 4" stroke="#14532d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg class="hero-animate" width="76" height="76" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                        <defs>
+                            <linearGradient id="g1" x1="0" x2="1">
+                                <stop offset="0%" stop-color="#fef3c7" />
+                                <stop offset="100%" stop-color="#fff7ed" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="24" cy="24" r="22" fill="#f59e0b" opacity="0.06"/>
+                        <g class="leaf leaf-1" transform="translate(6,6)">
+                            <path d="M6 13c1-3 5-6 9-6" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </g>
+                        <g class="leaf leaf-2" transform="translate(16,8)">
+                            <path d="M12 7c1 1 2 1 3 2 1 1 2 3 1 5" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </g>
+                        <g class="leaf leaf-3" transform="translate(8,16)">
+                            <path d="M12 12c-2 2-4 3-6 4" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </g>
                     </svg>
                     <span class="organic-badge hero-animate" style="background:var(--orcad-orange); color:var(--white); padding:8px 14px; border-radius:24px; font-weight:800; font-size:0.95rem;">Organic & Sustainable</span>
                 </div>
@@ -402,6 +428,26 @@
             <h2>About Our Enterprise</h2>
             <p>Driven by strict quality control across every layer of agriculture.</p>
         </div>
+        <!-- Company Profile: converted from presentation slides -->
+        <section style="background: linear-gradient(180deg, #ffffff, #fbfefb); border-top: 1px solid var(--border-muted);">
+            <h2 class="section-title">Company Profile</h2>
+            <p class="section-subtitle">ORCAD Integrated Limited — Integrated Agribusiness & Agro-Processing. "Pure Product, Healthy Living"</p>
+            <div class="grid-2" style="align-items:start; gap:30px;">
+                <div class="orcad-card">
+                    <h3>ORCAD Integrated Limited</h3>
+                    <p style="margin-bottom:8px; color:#475569;">RC Number: <strong>RC-9312228</strong></p>
+                    <p style="color:#475569;">Location: <strong>#1, Jago Road, Badeku, Ibadan, Oyo State</strong></p>
+                    <p style="margin-top:12px; color:#475569;">ORCAD Integrated Ltd is a fast-growing Nigerian agribusiness company positioned to become a fully integrated food production and agro-processing powerhouse. We operate a vertically integrated agro-industrial model spanning feed production, livestock, processing and distribution to reliably serve both local and export markets.</p>
+                </div>
+                <div class="orcad-card">
+                    <h3>Leadership</h3>
+                    <p style="margin-bottom:6px; color:#475569;"><strong>CADET P. ROBERT</strong><br><span style="color:var(--orcad-orange); font-weight:700;">Chief Executive Officer</span></p>
+                    <p style="color:#475569; margin-bottom:6px;"><strong>Phone:</strong> 07035373107</p>
+                    <p style="color:#475569; margin-bottom:6px;"><strong>Email:</strong> <a href="mailto:prcadet@orcadintegrated.com">Prcadet@orcadintegrated.com</a>, <a href="mailto:prcadet@orcadintegrated.com">prcadet@orcadintegrated.com</a></p>
+                    <p style="margin-top:10px; color:#475569;">"Partner with us to build a healthier, food-secure Nigeria and Africa."</p>
+                </div>
+            </div>
+        </section>
         <section>
             <div class="grid-3">
                 <div class="orcad-card">
@@ -949,7 +995,8 @@
                 <div class="orcad-card" style="grid-column: span 1.5;">
                     <h4>Direct Contact Lines</h4>
                     <p style="font-size:0.9rem; color:#475569; margin-top:15px;"><strong>Phone:</strong> 07035373107</p>
-                    <p style="font-size:0.9rem; color:#475569;"><strong>Email:</strong> prcadet@orcadintegrated.com</p>
+                    <p style="font-size:0.9rem; color:#475569;"><strong>Corporate Email:</strong> <a href="mailto:Prcadet@orcadintegratedlimited.com" style="color:inherit;">Prcadet@orcadintegratedlimited.com</a></p>
+                    <p style="font-size:0.9rem; color:#475569;"><strong>CEO Email:</strong> <a href="mailto:prcadet@gmail.com" style="color:inherit;">prcadet@gmail.com</a></p>
                 </div>
             </div>
             
@@ -1086,6 +1133,27 @@
 
             document.querySelectorAll('.hero-animate').forEach(el => io.observe(el));
         });
+
+        // CTA ripple effect
+        (function(){
+            function createRipple(e){
+                const btn = e.currentTarget;
+                const rect = btn.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height) * 1.2;
+                ripple.className = 'ripple';
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+                ripple.style.background = getComputedStyle(btn).backgroundColor === 'rgba(0, 0, 0, 0)' ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.28)';
+                btn.appendChild(ripple);
+                ripple.animate([{ transform: 'scale(0)', opacity: 0.9 }, { transform: 'scale(1.8)', opacity: 0 }], { duration: 600, easing: 'cubic-bezier(.2,.7,.2,1)' });
+                setTimeout(()=> { try{ btn.removeChild(ripple); } catch(e){} }, 700);
+            }
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', createRipple);
+            });
+        })();
 
         const links = document.querySelectorAll('.nav-link, .btn');
         const viewPanes = document.querySelectorAll('.page-view');
