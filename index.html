@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ORCAD Integrated — organic-focused agribusiness and agro-processing. Farm-to-fork commodities, oils, feed, honey, and eggs supplied to food & beverage and wholesale markets.">
+    <meta property="og:title" content="ORCAD Integrated Limited" />
+    <meta property="og:description" content="Organic-focused agribusiness & agro-processing — feed, palm oil, vegetable oil, soya oil, honey, eggs and more." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.ico" />
     <title>ORCAD Integrated Limited | Pure Product, Healthy Living</title>
     <style>
         /* --- ORCAD CORPORATE DESIGN TOKENS --- */
@@ -253,16 +258,23 @@
             .home-hero h2 { font-size: 2.2rem; }
             .form-row { grid-template-columns: 1fr; gap: 0; }
             nav ul { display: none; }
+            .mobile-nav-toggle { display: inline-flex; background: transparent; border: 0; color: var(--white); font-size: 1.1rem; gap:8px; align-items:center; }
+            .mobile-nav { display: none; position: absolute; top:70px; left:0; right:0; background: var(--orcad-green); padding: 12px 4%; }
         }
+        .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+        .skip-link:focus { left: 4%; top: 12px; width: auto; height: auto; background: #fff; color: #000; padding: 8px 12px; border-radius:4px; z-index:3000; }
     </style>
 </head>
 <body>
 
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <header>
         <div class="nav-container">
             <div class="logo"><h1>ORCAD<span>INTEGRATED</span></h1></div>
+            <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">☰ Menu</button>
             <nav>
-                <ul>
+                <ul id="primary-nav" aria-label="Primary Navigation">
                     <li><a href="#home" class="nav-link active-link">Home</a></li>
                     <li><a href="#about" class="nav-link">About Us</a></li>
                     <li><a href="#services" class="nav-link">Segments</a></li>
@@ -276,12 +288,18 @@
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
+
+            <div class="mobile-nav" aria-hidden="true"></div>
         </div>
     </header>
 
     <div id="home-view" class="page-view active-view">
         <div class="home-hero">
             <h2>Pure Product, Healthy Living</h2>
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+                <span style="background:var(--orcad-orange); color:var(--white); padding:6px 10px; border-radius:20px; font-weight:800; font-size:0.85rem;">Organic & Sustainable</span>
+                <small style="color:#e6f4ea;">Certified practices and regenerative farming</small>
+            </div>
             <p>Organic-focused integrated agribusiness & agro-processing powerhouse operating a vertically integrated Feed-to-Fork model with sustainable farming practices.</p>
             <div class="cta-group">
                 <a href="#partnerships" class="btn btn-orange">Partner With Us</a>
@@ -365,6 +383,18 @@
                     <h4>CADET P. ROBERT</h4>
                     <p style="color: var(--orcad-orange); font-weight: 700; font-size: 0.85rem; text-transform:uppercase;">Chief Executive Officer</p>
                     <p style="font-size:0.85rem; margin-top:10px; color:#475569;">Directing institutional strategy, downstream processing scaling, and commercial partnerships across Africa.</p>
+                </div>
+            </div>
+            <div style="max-width:900px; margin:30px auto 0;">
+                <div class="orcad-card">
+                    <h3>Our Organic Practices</h3>
+                    <p style="margin-bottom:10px;">We prioritize soil health, natural pest management, crop rotation, responsible water use, and full product traceability.</p>
+                    <ul style="padding-left:18px; color:#475569;">
+                        <li>Soil-first cultivation and compost-based fertility</li>
+                        <li>No synthetic pesticides where possible; integrated pest management</li>
+                        <li>Traceability from field to processing</li>
+                        <li>Regenerative practices to maintain long-term yields</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -965,6 +995,32 @@
     </footer>
 
     <script>
+        // Accessibility: toggle mobile nav
+        const mobileToggle = document.querySelector('.mobile-nav-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const primaryNav = document.getElementById('primary-nav');
+        mobileToggle && mobileToggle.addEventListener('click', () => {
+            const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+            mobileToggle.setAttribute('aria-expanded', String(!expanded));
+            if (!expanded) {
+                // clone primary nav into mobile nav
+                mobileNav.innerHTML = primaryNav.outerHTML;
+                mobileNav.style.display = 'block';
+                mobileNav.setAttribute('aria-hidden', 'false');
+            } else {
+                mobileNav.style.display = 'none';
+                mobileNav.setAttribute('aria-hidden', 'true');
+                mobileNav.innerHTML = '';
+            }
+        });
+
+        // Ensure all images are lazy-loaded for performance
+        window.addEventListener('load', function(){
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+            });
+        });
+
         const links = document.querySelectorAll('.nav-link, .btn');
         const viewPanes = document.querySelectorAll('.page-view');
 
